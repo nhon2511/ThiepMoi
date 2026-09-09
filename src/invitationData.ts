@@ -9,7 +9,7 @@ export const invitationData: CardData = {
   senderName: 'Khánh Hòa',
   title: 'Lời mời từ trái tim',
   message:
-    'Anh muốn mời em một buổi đi chơi riêng,\nđể cùng nhau uống cà phê, ăn một chút gì đó và nói chuyện nhiều hơn ngoài màn hình. Không cần chuẩn bị gì đặc biệt,\nchỉ cần em đồng ý đi cùng anh là được.\n\nEm đi với anh nhé?',
+    'Mình muốn mời cậu một buổi đi chơi riêng,\nđể cùng nhau uống cà phê hay ăn một chút gì đó và nói chuyện nhiều hơn ngoài màn hình. Không cần chuẩn bị gì đặc biệt,chỉ cần cậu đồng ý đi cùng mình là được.\n\nCậu đi với mình nhé?',
   date: '19 / 09 / 2026',
   time: '19:30',
   location: 'Đà Nẵng',
@@ -21,8 +21,8 @@ export const invitationData: CardData = {
  */
 export const acceptanceConfig: AcceptanceConfig = {
   imageUrl: '/rakko.png',
-  title: 'Anh biết mà! ❤️',
-  message: 'Anh biết mà, em sẽ đồng ý.\nVậy mình có một buổi hẹn nhé ❤️',
+  title: 'Mình biết mà! ❤️',
+  message: 'Mình biết cậu sẽ đồng ý.\nVậy 2 ta có một buổi hẹn nhé ❤️',
 };
 
 /** Phong cách thiệp — đổi giá trị để chuyển giao diện. */

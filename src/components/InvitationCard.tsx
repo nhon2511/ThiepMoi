@@ -99,24 +99,25 @@ export default function InvitationCard({ data, themeConfig, onAccept }: Invitati
     const container = actionsAreaRef.current;
     if (!container) return;
 
-    const rect = container.getBoundingClientRect();
     const isMobile = window.innerWidth <= 576;
 
-    const maxX = isMobile ? Math.min(75, rect.width / 2.5) : 110;
-    const maxY = isMobile ? 35 : 55;
+    // Wider evasion bounds inside card & screen viewport
+    const maxX = isMobile ? 135 : 220;
+    const maxY = isMobile ? 85 : 130;
 
     let randomX = (Math.random() - 0.5) * 2 * maxX;
     let randomY = (Math.random() - 0.5) * 2 * maxY;
 
-    if (Math.abs(randomX) < 30) {
-      randomX = randomX >= 0 ? 40 : -40;
+    // Ensure noticeable movement jump away from cursor
+    if (Math.abs(randomX) < 60) {
+      randomX = randomX >= 0 ? 80 : -80;
     }
-    if (Math.abs(randomY) < 15) {
-      randomY = randomY >= 0 ? 25 : -25;
+    if (Math.abs(randomY) < 30) {
+      randomY = randomY >= 0 ? 45 : -45;
     }
 
-    const randomRot = (Math.random() - 0.5) * 18;
-    const randomScale = 0.9 + Math.random() * 0.15;
+    const randomRot = (Math.random() - 0.5) * 45; // -22.5deg to 22.5deg
+    const randomScale = 0.85 + Math.random() * 0.3; // 0.85 to 1.15
 
     setDeclinePos({ x: randomX, y: randomY, rot: randomRot, scale: randomScale });
     setEvadeCount((prev) => prev + 1);

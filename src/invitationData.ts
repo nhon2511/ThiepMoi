@@ -20,7 +20,7 @@ export const invitationData: CardData = {
  * Dễ dàng thay đổi ảnh (imageUrl) và lời nhắn xác nhận ở đây.
  */
 export const acceptanceConfig: AcceptanceConfig = {
-  imageUrl: '/rakko.png',
+  imageUrl: '/rakko1.png',
   title: 'Mình biết mà! ❤️',
   message: 'Mình biết cậu sẽ đồng ý.\nVậy 2 ta có một buổi hẹn nhé ❤️',
 };

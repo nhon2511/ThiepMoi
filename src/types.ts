@@ -1,5 +1,11 @@
 export type ThemeStyle = 'romantic-rose' | 'moonlight-dream' | 'soft-sunset';
 
+export interface AcceptanceConfig {
+  imageUrl: string;
+  title: string;
+  message: string;
+}
+
 export interface CardData {
   senderName: string;
   recipientName: string;

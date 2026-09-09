@@ -1127,6 +1127,154 @@ body {
   to   { opacity: 1; transform: translateY(0);    }
 }
 
+/* ═══════ ACTION BUTTONS & EVASIVE DECLINE ═══════ */
+.inv-actions-container {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  position: relative;
+  min-height: 56px;
+  width: 100%;
+  transition: opacity 0.6s ease;
+}
+
+.inv-btn-accept {
+  position: relative;
+  padding: 0.85rem 2.2rem;
+  border-radius: 40px;
+  border: none;
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  z-index: 2;
+}
+
+.inv-btn-accept:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+.inv-btn-accept:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.inv-btn-accept:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+}
+
+.inv-btn-decline-box {
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+}
+
+.inv-btn-decline {
+  padding: 0.85rem 1.8rem;
+  border-radius: 40px;
+  border: 1px solid;
+  background: rgba(255, 255, 255, 0.7);
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease, border-color 0.3s ease;
+  user-select: none;
+  white-space: nowrap;
+  touch-action: manipulation;
+}
+
+.inv-btn-decline:hover {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+
+/* ═══════ ACCEPTED CELEBRATION SCREEN ═══════ */
+.inv-accepted-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inv-accepted-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.inv-accepted-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.inv-accepted-img-wrapper {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 3px solid;
+  overflow: hidden;
+  margin: 0 auto 1.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  transform: scale(0.95);
+  animation: invImgPop 0.8s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes invImgPop {
+  to { transform: scale(1); }
+}
+
+.inv-accepted-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.inv-accepted-title {
+  font-size: 1.65rem;
+  margin-bottom: 0.5rem;
+}
+
+.inv-accepted-message {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 1rem 0;
+  white-space: pre-line;
+}
+
+.inv-accepted-footer {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.inv-accepted-heart-beat {
+  display: inline-block;
+  animation: invHeartBeat 1.4s ease-in-out infinite;
+}
+
+@keyframes invHeartBeat {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.25); }
+}
+
 /* ═══════ RESPONSIVE TUNING ═══════ */
 
 /* Mobile Screens (375px & ~525px) */

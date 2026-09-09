@@ -1,8 +1,10 @@
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { type CardData, type ThemeConfig } from '../types';
 
 interface InvitationCardProps {
   data: CardData;
   themeConfig: ThemeConfig;
+  onAccept: () => void;
 }
 
 function OrnamentSvg({ color }: { color: string }) {
@@ -43,8 +45,89 @@ function MapPinIcon() {
   );
 }
 
-export default function InvitationCard({ data, themeConfig }: InvitationCardProps) {
+export default function InvitationCard({ data, themeConfig, onAccept }: InvitationCardProps) {
   const { colors } = themeConfig;
+  const [hasReadEnd, setHasReadEnd] = useState(false);
+
+  // Evasive "Từ chối" button state
+  const [evadeCount, setEvadeCount] = useState(0);
+  const [declinePos, setDeclinePos] = useState({ x: 0, y: 0, rot: 0, scale: 1 });
+  const declineBtnRef = useRef<HTMLButtonElement>(null);
+  const actionsAreaRef = useRef<HTMLDivElement>(null);
+
+  // Scroll detection
+  useEffect(() => {
+    const checkScroll = () => {
+      if (hasReadEnd) return;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+      if (docHeight <= windowHeight + 40 || scrollTop + windowHeight >= docHeight - 80) {
+        setHasReadEnd(true);
+      }
+    };
+
+    checkScroll();
+
+    const timer = setTimeout(() => {
+      setHasReadEnd(true);
+    }, 1200);
+
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    window.addEventListener('resize', checkScroll, { passive: true });
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', checkScroll);
+      window.removeEventListener('resize', checkScroll);
+    };
+  }, [hasReadEnd]);
+
+  // Evasive move handler
+  const handleEvade = useCallback((e?: React.SyntheticEvent) => {
+    if (e && e.type === 'touchstart') {
+      e.preventDefault();
+    }
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      setEvadeCount((prev) => prev + 1);
+      return;
+    }
+
+    const container = actionsAreaRef.current;
+    if (!container) return;
+
+    const rect = container.getBoundingClientRect();
+    const isMobile = window.innerWidth <= 576;
+
+    const maxX = isMobile ? Math.min(75, rect.width / 2.5) : 110;
+    const maxY = isMobile ? 35 : 55;
+
+    let randomX = (Math.random() - 0.5) * 2 * maxX;
+    let randomY = (Math.random() - 0.5) * 2 * maxY;
+
+    if (Math.abs(randomX) < 30) {
+      randomX = randomX >= 0 ? 40 : -40;
+    }
+    if (Math.abs(randomY) < 15) {
+      randomY = randomY >= 0 ? 25 : -25;
+    }
+
+    const randomRot = (Math.random() - 0.5) * 18;
+    const randomScale = 0.9 + Math.random() * 0.15;
+
+    setDeclinePos({ x: randomX, y: randomY, rot: randomRot, scale: randomScale });
+    setEvadeCount((prev) => prev + 1);
+  }, []);
+
+  const getDeclineLabel = () => {
+    if (evadeCount >= 5) return 'Đừng từ chối vội 🥺';
+    if (evadeCount >= 3) return 'Nút này hơi ngại đó 🙈';
+    if (evadeCount >= 1) return 'Thử lại nhé? 😜';
+    return 'Từ chối';
+  };
 
   return (
     <div className="inv-revealed inv-fade-in">
@@ -88,6 +171,43 @@ export default function InvitationCard({ data, themeConfig }: InvitationCardProp
           <div className="card-sender inv-stagger inv-s6">
             Thân mến,{' '}
             <span className="name" style={{ color: colors.titleColor }}>{data.senderName}</span>
+          </div>
+
+          {/* Action Choice Buttons */}
+          <div
+            ref={actionsAreaRef}
+            className={`inv-actions-container ${hasReadEnd ? 'inv-actions-appear' : ''}`}
+          >
+            <button
+              className="inv-btn-accept"
+              onClick={onAccept}
+              style={{
+                backgroundColor: colors.primary,
+                color: '#ffffff',
+                boxShadow: `0 8px 25px -4px ${colors.glow}`,
+              }}
+            >
+              <span>Đồng ý ❤️</span>
+            </button>
+
+            <div className="inv-btn-decline-box">
+              <button
+                ref={declineBtnRef}
+                className="inv-btn-decline"
+                onMouseEnter={handleEvade}
+                onTouchStart={handleEvade}
+                onPointerDown={handleEvade}
+                onFocus={handleEvade}
+                onClick={handleEvade}
+                style={{
+                  color: colors.textMuted,
+                  borderColor: colors.cardBorder,
+                  transform: `translate(${declinePos.x}px, ${declinePos.y}px) rotate(${declinePos.rot}deg) scale(${declinePos.scale})`,
+                }}
+              >
+                <span>{getDeclineLabel()}</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

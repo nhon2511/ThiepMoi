@@ -1,4 +1,4 @@
-import { type CardData, type ThemeStyle } from './types';
+import { type CardData, type ThemeStyle, type AcceptanceConfig } from './types';
 
 /**
  * Dữ liệu thiệp mời — chỉnh sửa ở đây để thay đổi nội dung thiệp.
@@ -13,6 +13,16 @@ export const invitationData: CardData = {
   date: '19 / 09 / 2026',
   time: '19:30',
   location: 'Đà Nẵng',
+};
+
+/**
+ * Cấu hình màn hình chúc mừng sau khi nhấn "Đồng ý".
+ * Dễ dàng thay đổi ảnh (imageUrl) và lời nhắn xác nhận ở đây.
+ */
+export const acceptanceConfig: AcceptanceConfig = {
+  imageUrl: '/rakko.png',
+  title: 'Anh biết mà! ❤️',
+  message: 'Anh biết mà, em sẽ đồng ý.\nVậy mình có một buổi hẹn nhé ❤️',
 };
 
 /** Phong cách thiệp — đổi giá trị để chuyển giao diện. */

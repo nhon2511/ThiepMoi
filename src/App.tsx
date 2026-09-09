@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import { themes } from './types';
-import { invitationData, invitationTheme } from './invitationData';
+import { invitationData, invitationTheme, acceptanceConfig } from './invitationData';
 import RomanticEffects from './components/RomanticEffects';
 import InvitationCard from './components/InvitationCard';
+import AcceptedScreen from './components/AcceptedScreen';
 
-type Phase = 'loading' | 'envelope' | 'opening' | 'revealed';
+type Phase = 'loading' | 'envelope' | 'opening' | 'revealed' | 'accepted';
 
 /* Luxury Wax Seal SVG */
 function WaxSealSvg({ color }: { color: string }) {
@@ -57,6 +58,10 @@ export default function App() {
   const handleOpen = useCallback(() => {
     setPhase('opening');
     setTimeout(() => setPhase('revealed'), 1600);
+  }, []);
+
+  const handleAccept = useCallback(() => {
+    setPhase('accepted');
   }, []);
 
   return (
@@ -140,7 +145,11 @@ export default function App() {
         )}
 
         {phase === 'revealed' && (
-          <InvitationCard data={invitationData} themeConfig={themeConfig} />
+          <InvitationCard data={invitationData} themeConfig={themeConfig} onAccept={handleAccept} />
+        )}
+
+        {phase === 'accepted' && (
+          <AcceptedScreen config={acceptanceConfig} themeConfig={themeConfig} />
         )}
       </div>
     </div>

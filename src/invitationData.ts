@@ -22,7 +22,7 @@ export const invitationData: CardData = {
 export const acceptanceConfig: AcceptanceConfig = {
   imageUrl: '/rakko.png',
   title: 'Mình biết mà! ❤️',
-  message: 'Mình biết cậu sẽ đồng ý.\nVậy 2 ta có một buổi hẹn nhé ❤️',
+  message: 'Mình biết cậu sẽ đồng ý.\nVậy 2 ta có một buổi hẹn nha ❤️',
 };
 
 /** Phong cách thiệp — đổi giá trị để chuyển giao diện. */

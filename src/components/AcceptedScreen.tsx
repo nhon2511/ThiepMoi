@@ -51,7 +51,7 @@ export default function AcceptedScreen({ config, themeConfig }: AcceptedScreenPr
           </p>
 
           <div className="inv-accepted-footer inv-stagger inv-s5" style={{ color: colors.textMuted }}>
-            <span className="inv-accepted-heart-beat" style={{ color: colors.primary }}>♥</span> Gặp nhau sớm nhé!
+            <span className="inv-accepted-heart-beat" style={{ color: colors.primary }}>♥</span> Gặp nhau sớm nha!
           </div>
         </div>
       </div>
